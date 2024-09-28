@@ -1,3 +1,4 @@
+/* Estilo do corpo */
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -8,6 +9,7 @@ body {
     padding: 20px;
 }
 
+/* Estilo do cabeçalho */
 header {
     display: flex;
     flex-direction: column;
@@ -15,31 +17,77 @@ header {
     margin-bottom: 20px;
 }
 
+/* Estilo do tabuleiro */
 #game-board {
     display: grid;
     gap: 10px;
     margin-top: 20px;
+    grid-template-columns: repeat(8, 1fr); /* Define 4 colunas */
 }
 
+/* Estilo da carta */
+/* Estilo da carta */
 .card {
     width: 100px;
     height: 150px;
-    background-color: #ccc;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    color: transparent;
-    transition: 2s;
+    position: relative;
+    perspective: 1000px; /* Define a perspectiva para 3D */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    border: 2px solid #aaa; /* Borda para as cartas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidade */
 }
 
-.card.flipped {
-    color: black;
-    background-color: #fff;
+/* Estilos para as faces da carta */
+.card .front-face, .card .back-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Oculta a face traseira durante a rotação */
+    border-radius: 8px; /* Bordas arredondadas */
+    display: flex; /* Para centralizar o conteúdo */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    font-size: 2rem; /* Tamanho da fonte */
+    transition: transform 0.6s; /* Duração da animação */
+    border: 1px solid #ddd; /* Borda das cartas */
 }
 
+/* Estilo da frente da carta (visível inicialmente) */
+/* Estilo da frente da carta (inicialmente oculta) */
+.front-face {
+    background-color: #fff; /* Cor de fundo da frente */
+    color: black; /* Cor do texto da frente */
+    transform: rotateY(180deg); /* Esconde a frente inicialmente */
+    opacity: 1; /* Garante que a frente não seja transparente */
+}
+
+/* Estilo do verso da carta (visível inicialmente) */
+.back-face {
+    background-color: #ccc; /* Cor de fundo do verso */
+    color: transparent; /* Texto oculto no verso */
+    transform: rotateY(0deg); /* Mostra o verso inicialmente */
+    opacity: 1; /* Garante que o verso não seja transparente */
+}
+
+/* Animação de virar as cartas */
+.card.flipped .front-face {
+    transform: rotateY(0deg); /* Mostra a frente da carta quando virada */
+}
+
+.card.flipped .back-face {
+    transform: rotateY(180deg); /* Esconde o verso da carta quando virada */
+}
+
+
+/* Estilo do botão de reiniciar */
+#restart {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+}
+
+/* Estilo do seletor de dificuldade */
 #difficulty {
     margin-top: 10px;
 }
